@@ -25,5 +25,22 @@ foo.o: foo.c foo.h
 
 ## Automatic Variables
 
-- $@        The filename representing the target.
-- $%        The filename element of an archive member specification.
+* $@ &emsp; The filename representing the target.
+* $% &emsp; The filename element of an archive member specification.
+* $< &emsp; The filename of the first prerequisite.
+* $? &emsp; The names of all prerequisites taht are newer than the target, separated by spaces.
+* $^ &emsp; The filenames of all the prerequisites, separated by spaces.
+* \$\+ &emsp; Similar to $^, this is the names of all the prerequisites separated by spaces, 
+except that \$+ includes duplicates. 
+* $* &emsp; The stem of the target filename. A stem is typically a filename without its suffix.
+
+A pattern rule looks like the normal rules except the stemp of the file (the portion before 
+the suffix) is represented by a % character.
+
+```
+VPATH = src include
+CPPFLAGS = -I include
+
+%.o: %.c
+    $(COMPILE.c) $(OUTPUT_OPTION) $<>
+```
