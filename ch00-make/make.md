@@ -42,5 +42,5 @@ VPATH = src include
 CPPFLAGS = -I include
 
 %.o: %.c
-    $(COMPILE.c) $(OUTPUT_OPTION) $<>
+    $(COMPILE.c) $(OUTPUT_OPTION) $<
 ```
