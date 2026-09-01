@@ -1,0 +1,9 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+BreakBeforeBraces: Stroustrup
+PointerAlignment: Left # Tends to keep & closer to name, try Left for closer to type
+IndentWidth: 4
+AccessModifierOffset: -4
+IndentAccessModifiers: false
+...
