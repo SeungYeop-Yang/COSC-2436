@@ -1,7 +1,8 @@
 #ifndef PLAIN_BOX_
 #define PLAIN_BOX_
 
-typedef double ItemType;
+// typedef double ItemType;
+template <class ItemType>
 
 class PlainBox {
 private:
@@ -19,4 +20,5 @@ public:
     ItemType getItem() const;
 };
 
+#include "PlainBox.cpp"
 #endif
