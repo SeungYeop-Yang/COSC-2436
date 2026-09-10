@@ -1,4 +1,4 @@
-all: recursion factorial factorial_recursive
+all: recursion factorial factorial_recursive backward
 
 
 recursion: recursion.cpp
@@ -10,6 +10,9 @@ factorial: factorial.cpp
 factorial_recursive: factorial_recursive.cpp
 	g++ -o factorial_recursive factorial_recursive.cpp
 
+backward: backward.cpp
+	g++ -o backward backward.cpp
+
 .PHONY: cleanall
 cleanall: 
-	rm -f recursion factorial factorial_recursive
+	rm -f recursion factorial factorial_recursive backward
