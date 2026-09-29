@@ -8,7 +8,7 @@ ToyBox<ItemType>::ToyBox(const Color& theColor) : boxColor(theColor)
 }
 
 template <class ItemType>
-ToyBox<ItemType>::ToyBox(const ItemType& theItem, cost Color& theColor)
+ToyBox<ItemType>::ToyBox(const ItemType& theItem, const Color& theColor)
     : PlainBox<ItemType>(theItem), boxColor(theColor)
 {
 }
