@@ -13,6 +13,6 @@ factorial_recursive: factorial_recursive.cpp
 backward: backward.cpp
 	g++ -o backward backward.cpp
 
-.PHONY: cleanall
-cleanall: 
+.PHONY: clean
+clean: 
 	rm -f recursion factorial factorial_recursive backward
