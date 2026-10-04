@@ -62,7 +62,7 @@ void MostDups(ArrayBag<int>&, ArrayBag<int>&, string, string);
 void findProducts(ArrayBag<int>&, ArrayBag<int>&);
 void loadNewValues(ArrayBag<int>&, ArrayBag<int>&);
 void tests(ArrayBag<int>&, ArrayBag<int>&);
-void vector_print(vector<int>);
+ostream& operator<<(ostream&, const vector<int>&);
 void sampleProgramFunction(ArrayBag<int>& bag);
 
 /********1*********2*********3*********4*********5*********6*********7*********8
@@ -181,12 +181,8 @@ void playMostDups(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
     getline(cin >> ws, player_B);
     cout << endl;
 
-    cout << player_A << " has ";
-    vector_print(bag_A.toVector());
-    cout << endl;
-    cout << player_B << " has ";
-    vector_print(bag_B.toVector());
-    cout << endl;
+    cout << player_A << " has " << bag_A.toVector() << endl;
+    cout << player_B << " has " << bag_B.toVector() << endl;
     cout << endl;
 
     MostDups(bag_A, bag_B, player_A, player_B);
@@ -246,12 +242,19 @@ void MostDups(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B, string player_A,
         cout << player_A << " and " << player_B << " got a tie." << endl;
     }
 }
-
-void vector_print(vector<int> v)
+/********1*********2*********3*********4*********5*********6*********7*********8
+ *
+ * cout << vector<int>
+ *
+ * overload the << operator to print the contents of a vector<int> in a line
+ *
+ ********1*********2*********3*********4*********5*********6*********7*********/
+ostream& operator<<(ostream& os, const vector<int>& v)
 {
     for (const auto& element : v) {
-        cout << element << " ";
+        os << element << " ";
     }
+    return os;
 }
 /********1*********2*********3*********4*********5*********6*********7*********8
  *
@@ -277,10 +280,10 @@ void vector_print(vector<int> v)
 void findProducts(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
 {
     cout << "bag_A contains: ";
-    vector_print(bag_A.toVector());
+    cout << bag_A.toVector();
     cout << endl << "The product bag_A is " << bag_A.getProduct() << endl;
     cout << "bag_B contains: ";
-    vector_print(bag_B.toVector());
+    cout << bag_B.toVector();
     cout << endl << "The product bag_B is " << bag_B.getProduct() << endl;
 }
 /********1*********2*********3*********4*********5*********6*********7*********8
