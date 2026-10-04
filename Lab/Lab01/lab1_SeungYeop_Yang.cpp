@@ -8,8 +8,8 @@
  * User Interface
  * 	You will give the user the option to play the Most Dups game, display
  *  the product of the integers in each bag, load the Bags with new values,
- * 	and	quit. Allow the user to keep doingthese things until they choose
- * 	to quit.
+ * 	and	quit. Allow the user to keep doing these things until they
+ *  choose to quit.
  *
  * playMostDups()
  * 	When this option is chosen you will play a simple game that requires two
@@ -121,27 +121,13 @@ int main()
 } // end main
 
 /********1*********2*********3*********4*********5*********6*********7*********8
-// Function:   sampleProgramFunction
-// Inputs:     the array bag
-// Outputs:    none
-// Purpose:    This function exercises some of the bag methods
-*********1*********2*********3*********4*********5*********6*********7*********/
-// This function should be deleted from your client program.
-void sampleProgramFunction(ArrayBag<int>& bag)
-{
-    cout << "The bag is not empty; isEmpty: returns " << bag.isEmpty() << endl;
-
-    cout << "The bag contains " << bag.getCurrentSize() << " items\n";
-
-} // end bagTester
-
-/********1*********2*********3*********4*********5*********6*********7*********8
-
-function: displayMenu()
-        input : None
-        return : int choice
-
-*********1*********2*********3*********4*********5*********6*********7*********/
+ *
+ * displayMenu()
+ * 	You will give the user the option to play the Most Dups game, display
+ *  the product of the integers in each bag, load the Bags with new values,
+ * 	and	quit.
+ *
+ ********1*********2*********3*********4*********5*********6*********7*********/
 int displayMenu()
 {
     int choice;
@@ -268,10 +254,6 @@ void loadNewValues(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
 
     cout << "    -----------------------------------" << endl;
     cout << "The bags are cleared: " << endl;
-    // cout << "bag_A contains: ";
-    // bag_A.println();
-    // cout << "bag_B contains: ";
-    // bag_B.println();
 
     for (int i = 0; i < 10; i++) {
         bag_A.add((rand() % 10) + 1);
@@ -287,8 +269,4 @@ void loadNewValues(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
 }
 /********1*********2*********3*********4*********5*********6*********7*********8
 *********1*********2*********3*********4*********5*********6*********7*********/
-void tests(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
-{
-    sampleProgramFunction(bag_A);
-    sampleProgramFunction(bag_B);
-}
+void tests(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B) {}
