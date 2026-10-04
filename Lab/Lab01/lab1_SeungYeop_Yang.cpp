@@ -87,20 +87,6 @@ int main()
     cout << "bag_B contains: ";
     bag_B.println();
 
-    // vector<int> vector_bag_A, vector_bag_B;
-
-    // vector_bag_A = bag_A.toVector();
-    // vector_bag_B = bag_B.toVector();
-
-    // cout << "vector_bag_A contains: ";
-    // for (size_t i = 0; i < vector_bag_A.size(); i++)
-    //     cout << vector_bag_A[i] << " ";
-    // cout << endl;
-    // cout << "vector_bag_B contains: ";
-    // for (size_t i = 0; i < vector_bag_B.size(); i++)
-    //     cout << vector_bag_B[i] << " ";
-    // cout << endl;
-
     int choice; // the choice out of menu
 
     do {
