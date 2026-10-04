@@ -114,6 +114,11 @@ std::vector<ItemType> ArrayBag<ItemType>::toVector() const
     return bagContents;
 } // end toVector
 
+template <class ItemType> int ArrayBag<ItemType>::getProduct() const
+{
+    return product(items, itemCount);
+}
+
 // private
 template <class ItemType>
 int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
@@ -135,3 +140,12 @@ int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
 
     return result;
 } // end getIndexOf
+
+// private
+template <class ItemType>
+int ArrayBag<ItemType>::product(const ItemType arr[], int n) const
+{
+    if (n == 1)
+        return arr[0];
+    return arr[n - 1] * product(arr, n - 1);
+}

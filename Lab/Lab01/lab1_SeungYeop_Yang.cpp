@@ -11,6 +11,36 @@
  * 	and	quit. Allow the user to keep doingthese things until they choose
  * 	to quit.
  *
+ * playMostDups()
+ * 	When this option is chosen you will play a simple game that requires two
+ * 	players. Ask each player for their name. Remember that their name may
+ * 	contain spaces.
+ *
+ * 	This game will not need any new methods in the Bag ADT.
+ * 	Your program will then examine each bag, finding the integer that
+ * 	appears most often. The player that has the largest number of duplicated
+ * 	value is the winner. Your program will display the contents of each Bag
+ * 	using the "toVector" method, identifying who's bag it is by name.
+ *
+ * findProducts()
+ * 	First display the contents of each Bag using the "toVector" method,
+ * 	identifying the Bags as "Bag 1" and "Bag 2" or something similar.
+ *
+ * 	Adding to the array bag ADT, using the code from the text book, which is
+ * 	attached to the assignment, you will add one new public method and one
+ * 	new private recursive helper method.
+ *
+ * 	A private recursive method to calculate and return the product
+ * 	of the integers in the bag, with a public method for the client code to
+ * 	invoke.
+ *
+ * 	The client-facing method should not take any input. if you need
+ * 	parameters to be able to achieve the recursion, you should have a
+ * 	private helper method that the public method calls; you do not require
+ * 	the client code to pass additional arguments your recursive method
+ * 	requires.
+ *
+ *
  ********1*********2*********3*********4*********5*********6*********7*********/
 #include "ArrayBag.h"
 #include <iostream>
@@ -151,38 +181,14 @@ int displayMenu()
 }
 
 /********1*********2*********3*********4*********5*********6*********7*********8
+ *
+ *
 
-function playMostDups()
-    input : references for bag_A and bag_B
-    return :
 
-        When this option is chosen you will play a simple game that requires two
-        players. Ask each player for their name. Remember that their name may
-        contain spaces.
-
-        This game will not need any new methods in the Bag ADT.
-
-        Your program will then examine each bag, finding the integer that
-        appears most often. The player that has the largest number of
-        duplicated value is the winner.
-
-        Your program will display the contents of each Bag using the
-        "toVector" method, identifying who's bag it is by name.
 
 *********1*********2*********3*********4*********5*********6*********7*********/
 void playMostDups(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
 {
-    // cout << "bag_A contains: ";
-    // bag_A.println();
-    // cout << "bag_B contains: ";
-    // bag_B.println();
-    // cout << "bag_A contains: ";
-    // vector_print(bag_A.toVector());
-    // cout << endl;
-    // cout << "bag_B contains: ";
-    // vector_print(bag_B.toVector());
-    // cout << endl;
-
     string player_A, player_B;
     int dup_A[11] = {0}, dup_B[11] = {0};
     int temp_A, temp_B, mostDup_A, mostDup_B;
@@ -192,12 +198,14 @@ void playMostDups(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
     getline(cin >> ws, player_A);
     cout << "Enter name of player 2: ";
     getline(cin >> ws, player_B);
+    cout << endl;
 
-    cout << "\t" << player_A << " has ";
+    cout << player_A << " has ";
     vector_print(bag_A.toVector());
     cout << endl;
-    cout << "\t" << player_B << " has ";
+    cout << player_B << " has ";
     vector_print(bag_B.toVector());
+    cout << endl;
     cout << endl;
 
     for (int i = 1; i < 11; i++) {
@@ -221,18 +229,17 @@ void playMostDups(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
     mostDup_A = dup_A[dup_A[0]];
     mostDup_B = dup_B[dup_B[0]];
 
-    cout << "\t" << player_A << " " << mostDup_A << " " << dup_A[0] << "'s"
-         << endl;
-    cout << "\t" << player_B << " " << mostDup_B << " " << dup_B[0] << "'s"
-         << endl;
+    cout << player_A << " got " << mostDup_A << " " << dup_A[0] << "'s" << endl;
+    cout << player_B << " got " << mostDup_B << " " << dup_B[0] << "'s" << endl;
+    cout << endl;
 
     if (mostDup_A > mostDup_B) {
         cout << player_A << " wins with " << mostDup_A << " " << dup_A[0]
-             << "'s";
+             << "'s" << endl;
     }
     else if (mostDup_B > mostDup_A) {
         cout << player_B << " wins with " << mostDup_B << " " << dup_B[0]
-             << "'s";
+             << "'s" << endl;
     }
     else {
         cout << player_A << " and " << player_B << " got a tie." << endl;
@@ -246,18 +253,25 @@ void vector_print(vector<int> v)
     }
 }
 /********1*********2*********3*********4*********5*********6*********7*********8
-*********1*********2*********3*********4*********5*********6*********7*********/
+ *
+ *
+ *********1*********2*********3*********4*********5*********6*********7*********/
 void findProducts(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
 {
     cout << "bag_A contains: ";
-    bag_A.println();
+    vector_print(bag_A.toVector());
+    cout << endl << "The product bag_A is " << bag_A.getProduct() << endl;
     cout << "bag_B contains: ";
-    bag_B.println();
+    vector_print(bag_B.toVector());
+    cout << endl << "The product bag_B is " << bag_B.getProduct() << endl;
 }
 /********1*********2*********3*********4*********5*********6*********7*********8
-*********1*********2*********3*********4*********5*********6*********7*********/
+ *
+ *
+ *********1*********2*********3*********4*********5*********6*********7*********/
 void loadNewValues(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
 {
+    cout << "The old values of the bags: " << endl;
     cout << "bag_A contains: ";
     bag_A.println();
     cout << "bag_B contains: ";
@@ -266,16 +280,20 @@ void loadNewValues(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
     bag_A.clear();
     bag_B.clear();
 
-    cout << "bag_A contains: ";
-    bag_A.println();
-    cout << "bag_B contains: ";
-    bag_B.println();
+    cout << "    -----------------------------------" << endl;
+    cout << "The bags are cleared: " << endl;
+    // cout << "bag_A contains: ";
+    // bag_A.println();
+    // cout << "bag_B contains: ";
+    // bag_B.println();
 
     for (int i = 0; i < 10; i++) {
         bag_A.add((rand() % 10) + 1);
         bag_B.add((rand() % 10) + 1);
     }
 
+    cout << "    -----------------------------------" << endl;
+    cout << "The new values of the bags: " << endl;
     cout << "bag_A contains: ";
     bag_A.println();
     cout << "bag_B contains: ";

@@ -14,6 +14,7 @@ private:
     // contains the given target or -1, if the array does not contain
     // the target.
     int getIndexOf(const ItemType& target) const;
+    int product(const ItemType arr[], int n) const;
 
 public:
     ArrayBag();
@@ -26,6 +27,7 @@ public:
     bool contains(const ItemType& anEntry) const;
     int getFrequencyOf(const ItemType& anEntry) const;
     std::vector<ItemType> toVector() const;
+    int getProduct() const;
 }; // end ArrayBag
 
 #include "ArrayBag.cpp"
