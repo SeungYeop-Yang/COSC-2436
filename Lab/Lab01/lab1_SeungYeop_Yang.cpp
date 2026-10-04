@@ -5,24 +5,11 @@
  *
  * Lab 1: "Arrays and Recursion"
  *
- * Use a Bag Object of Integers
- * 	Your client program will use integers as the data type for the items in
- a
- * 	Bag.
- * 	Load each of two Bags with 10 random integers ranging from 1 to 10 when
- * 	your program begins. You will allow duplicates in the Bags.
- *
  * User Interface
  * 	You will give the user the option to play the Most Dups game, display
- the
- * 	product of the integers in each bag, load the Bags with new values, and
- * 	quit. Allow the user to keep doingthese things until they choose to
- quit.
- *
- *
-
-
-
+ *  the product of the integers in each bag, load the Bags with new values,
+ * 	and	quit. Allow the user to keep doingthese things until they choose
+ * 	to quit.
  *
  ********1*********2*********3*********4*********5*********6*********7*********/
 #include "ArrayBag.h"
@@ -32,17 +19,57 @@
 
 using namespace std;
 
+const int PLAY_MOST_DUPS = 1;
+const int FIND_PRODUCTS = 2;
+const int LOAD_NEW_VALUES = 3;
 const int QUIT_GAME = 4; // const int (4) to quit the game
+const int TESTS = 5;
 
 int displayMenu(); // display main menu
-void playMostDups();
-void findProducts();
-void loadNewValues();
-void tests();
+void playMostDups(ArrayBag<int>&, ArrayBag<int>&);
+void findProducts(ArrayBag<int>&, ArrayBag<int>&);
+void loadNewValues(ArrayBag<int>&, ArrayBag<int>&);
+void tests(ArrayBag<int>&, ArrayBag<int>&);
+void vector_print(vector<int>);
 void sampleProgramFunction(ArrayBag<int>& bag);
+
+/********1*********2*********3*********4*********5*********6*********7*********8
+
+*********1*********2*********3*********4*********5*********6*********7*********/
 
 int main()
 {
+
+    // seed the random number generator for the game
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    // Load each of two Bags with 10 random integers ranging from 1 to 10
+    // when your program begins. You will allow duplicates in the Bags.
+    ArrayBag<int> bag_A, bag_B;
+
+    for (int i = 0; i < 10; i++) {
+        bag_A.add((rand() % 10) + 1);
+        bag_B.add((rand() % 10) + 1);
+    }
+
+    cout << "bag_A contains: ";
+    bag_A.println();
+    cout << "bag_B contains: ";
+    bag_B.println();
+
+    // vector<int> vector_bag_A, vector_bag_B;
+
+    // vector_bag_A = bag_A.toVector();
+    // vector_bag_B = bag_B.toVector();
+
+    // cout << "vector_bag_A contains: ";
+    // for (size_t i = 0; i < vector_bag_A.size(); i++)
+    //     cout << vector_bag_A[i] << " ";
+    // cout << endl;
+    // cout << "vector_bag_B contains: ";
+    // for (size_t i = 0; i < vector_bag_B.size(); i++)
+    //     cout << vector_bag_B[i] << " ";
+    // cout << endl;
 
     int choice; // the choice out of menu
 
@@ -50,20 +77,20 @@ int main()
         choice = displayMenu();
         switch (choice) {
 
-        case 1:
-            playMostDups();
+        case PLAY_MOST_DUPS:
+            playMostDups(bag_A, bag_B);
             break;
-        case 2:
-            findProducts();
+        case FIND_PRODUCTS:
+            findProducts(bag_A, bag_B);
             break;
-        case 3:
-            loadNewValues();
+        case LOAD_NEW_VALUES:
+            loadNewValues(bag_A, bag_B);
             break;
         case QUIT_GAME:
             cout << "Thanks for playing the game. Bye!!!" << endl;
             break;
-        case 5:
-            tests(); // my own test suite
+        case TESTS:
+            tests(bag_A, bag_B); // my own test suite
             cout << "---------------------------------------" << endl;
             break;
         default:
@@ -77,12 +104,12 @@ int main()
 
 } // end main
 
-/****************************************************************/
+/********1*********2*********3*********4*********5*********6*********7*********8
 // Function:   sampleProgramFunction
 // Inputs:     the array bag
 // Outputs:    none
 // Purpose:    This function exercises some of the bag methods
-/****************************************************************/
+*********1*********2*********3*********4*********5*********6*********7*********/
 // This function should be deleted from your client program.
 void sampleProgramFunction(ArrayBag<int>& bag)
 {
@@ -92,6 +119,13 @@ void sampleProgramFunction(ArrayBag<int>& bag)
 
 } // end bagTester
 
+/********1*********2*********3*********4*********5*********6*********7*********8
+
+function: displayMenu()
+        input : None
+        return : int choice
+
+*********1*********2*********3*********4*********5*********6*********7*********/
 int displayMenu()
 {
     int choice;
@@ -115,7 +149,142 @@ int displayMenu()
 
     return choice;
 }
-void playMostDups() {}
-void findProducts() {}
-void loadNewValues() {}
-void tests() {}
+
+/********1*********2*********3*********4*********5*********6*********7*********8
+
+function playMostDups()
+    input : references for bag_A and bag_B
+    return :
+
+        When this option is chosen you will play a simple game that requires two
+        players. Ask each player for their name. Remember that their name may
+        contain spaces.
+
+        This game will not need any new methods in the Bag ADT.
+
+        Your program will then examine each bag, finding the integer that
+        appears most often. The player that has the largest number of
+        duplicated value is the winner.
+
+        Your program will display the contents of each Bag using the
+        "toVector" method, identifying who's bag it is by name.
+
+*********1*********2*********3*********4*********5*********6*********7*********/
+void playMostDups(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
+{
+    // cout << "bag_A contains: ";
+    // bag_A.println();
+    // cout << "bag_B contains: ";
+    // bag_B.println();
+    // cout << "bag_A contains: ";
+    // vector_print(bag_A.toVector());
+    // cout << endl;
+    // cout << "bag_B contains: ";
+    // vector_print(bag_B.toVector());
+    // cout << endl;
+
+    string player_A, player_B;
+    int dup_A[11] = {0}, dup_B[11] = {0};
+    int temp_A, temp_B, mostDup_A, mostDup_B;
+
+    cout << "You chose 'PLAY MOST DUPS' game." << endl << endl;
+    cout << "Enter name of player 1: ";
+    getline(cin >> ws, player_A);
+    cout << "Enter name of player 2: ";
+    getline(cin >> ws, player_B);
+
+    cout << "\t" << player_A << " has ";
+    vector_print(bag_A.toVector());
+    cout << endl;
+    cout << "\t" << player_B << " has ";
+    vector_print(bag_B.toVector());
+    cout << endl;
+
+    for (int i = 1; i < 11; i++) {
+        dup_A[i] = bag_A.getFrequencyOf(i);
+        // debug cout << "dupA[" << i << "]" << "= " << dup_A[i] << endl;
+        dup_B[i] = bag_B.getFrequencyOf(i);
+        // debug cout << "dupB[" << i << "]" << "= " << dup_B[i] << endl;
+    }
+
+    temp_A = temp_B = 0;
+    for (int i = 1; i < 11; i++) {
+        if (dup_A[i] >= temp_A) {
+            temp_A = dup_A[i];
+            dup_A[0] = i;
+        }
+        if (dup_B[i] >= temp_B) {
+            temp_B = dup_B[i];
+            dup_B[0] = i;
+        }
+    }
+    mostDup_A = dup_A[dup_A[0]];
+    mostDup_B = dup_B[dup_B[0]];
+
+    cout << "\t" << player_A << " " << mostDup_A << " " << dup_A[0] << "'s"
+         << endl;
+    cout << "\t" << player_B << " " << mostDup_B << " " << dup_B[0] << "'s"
+         << endl;
+
+    if (mostDup_A > mostDup_B) {
+        cout << player_A << " wins with " << mostDup_A << " " << dup_A[0]
+             << "'s";
+    }
+    else if (mostDup_B > mostDup_A) {
+        cout << player_B << " wins with " << mostDup_B << " " << dup_B[0]
+             << "'s";
+    }
+    else {
+        cout << player_A << " and " << player_B << " got a tie." << endl;
+    }
+}
+
+void vector_print(vector<int> v)
+{
+    for (const auto& element : v) {
+        cout << element << " ";
+    }
+}
+/********1*********2*********3*********4*********5*********6*********7*********8
+*********1*********2*********3*********4*********5*********6*********7*********/
+void findProducts(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
+{
+    cout << "bag_A contains: ";
+    bag_A.println();
+    cout << "bag_B contains: ";
+    bag_B.println();
+}
+/********1*********2*********3*********4*********5*********6*********7*********8
+*********1*********2*********3*********4*********5*********6*********7*********/
+void loadNewValues(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
+{
+    cout << "bag_A contains: ";
+    bag_A.println();
+    cout << "bag_B contains: ";
+    bag_B.println();
+
+    bag_A.clear();
+    bag_B.clear();
+
+    cout << "bag_A contains: ";
+    bag_A.println();
+    cout << "bag_B contains: ";
+    bag_B.println();
+
+    for (int i = 0; i < 10; i++) {
+        bag_A.add((rand() % 10) + 1);
+        bag_B.add((rand() % 10) + 1);
+    }
+
+    cout << "bag_A contains: ";
+    bag_A.println();
+    cout << "bag_B contains: ";
+    bag_B.println();
+}
+/********1*********2*********3*********4*********5*********6*********7*********8
+*********1*********2*********3*********4*********5*********6*********7*********/
+void tests(ArrayBag<int>& bag_A, ArrayBag<int>& bag_B)
+{
+    sampleProgramFunction(bag_A);
+    sampleProgramFunction(bag_B);
+}
