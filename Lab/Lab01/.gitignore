@@ -1,0 +1,15 @@
+# Compiled binaries
+lab1_SeungYeop_Yang
+*.o
+*.obj
+*.exe
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Editor files
+.vscode/
+.DS_Store
