@@ -187,6 +187,7 @@ bool checkForLoopPunctuation(string oneLine)
 {
 
     LinkedStack<char> stackPunctuation;
+    bool multipleStatementsInBody = false;
     // debugPrint oneLine
     debugPrint("debugPrint checkForLoopPunctuation oneLine: " + oneLine);
 
@@ -276,6 +277,9 @@ bool checkForLoopPunctuation(string oneLine)
                        "semicolons");
             return false;
         }
+        else {
+            multipleStatementsInBody = true;
+        }
     }
     else {
         // if the loop body does not have {}, then there should be only one
@@ -290,38 +294,56 @@ bool checkForLoopPunctuation(string oneLine)
                        "one semicolon");
             return false;
         }
+        multipleStatementsInBody = false;
     }
 
     // check if the parentheses and curly braces are balanced
-    if (!stackPunctuation.isEmpty()) {
+    // if stack is empty, then the punctuation is not correct.
+    if (stackPunctuation.isEmpty()) {
+        debugPrint("debugPrint checkForLoopPunctuation: stackPunctuation is "
+                   "empty");
+        return false;
+    }
+    else {
         debugPrint("debugPrint checkForLoopPunctuation: stackPunctuation is "
                    "not empty");
-        // check if the top of the stack is closing brace
-        char topChar = stackPunctuation.peek();
-        if (topChar == '}') {
-            stackPunctuation.pop();
-            if (stackPunctuation.isEmpty() || stackPunctuation.peek() != '{') {
-                debugPrint(
-                    "debugPrint checkForLoopPunctuation: stackPunctuation is "
-                    "not balanced");
+        // check if the body has multiple statements and if so, then the top of
+        // the stack should be '}'
+        if (multipleStatementsInBody) {
+            char topChar = stackPunctuation.peek();
+            if (topChar == '}') {
+                stackPunctuation.pop();
+                if (stackPunctuation.isEmpty() ||
+                    stackPunctuation.peek() != '{') {
+                    debugPrint("debugPrint checkForLoopPunctuation: "
+                               "stackPunctuation is "
+                               "not balanced");
+                    return false;
+                }
+                stackPunctuation.pop();
+            }
+            else {
+                debugPrint("debugPrint checkForLoopPunctuation: "
+                           "stackPunctuation is not "
+                           "balanced");
                 return false;
             }
-            stackPunctuation.pop();
         }
-        else if (topChar == ')') {
+        char topChar = stackPunctuation.peek();
+        if (topChar == ')') {
             stackPunctuation.pop();
             if (stackPunctuation.isEmpty() || stackPunctuation.peek() != '(') {
-                debugPrint(
-                    "debugPrint checkForLoopPunctuation: stackPunctuation is "
-                    "not balanced");
+                debugPrint("debugPrint checkForLoopPunctuation: "
+                           "stackPunctuation is "
+                           "not balanced");
                 return false;
             }
             stackPunctuation.pop();
         }
         else {
-            debugPrint(
-                "debugPrint checkForLoopPunctuation: stackPunctuation is not "
-                "balanced");
+            debugPrint("debugPrint checkForLoopPunctuation: "
+                       "stackPunctuation is not "
+                       "balanced");
             return false;
         }
     }
